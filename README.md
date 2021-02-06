@@ -13,3 +13,18 @@ curl -X POST \
   -d 'name=david&email=david%40gmail.com&phone=111111&place=here%20or%20there'
 
 
+### Endpoints
+
+POST /adress/{id} => get one row
+GET /adress => list all rows
+PUT /adress => insert one row
+DELETE /adress/{id} => remove an item
+
+
+
+### Useful commands
+
+  ```
+  docker ps
+  docker network ls
+  ```
