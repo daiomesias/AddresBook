@@ -1,7 +1,5 @@
 # References
 
-docker-compose up
-docker-compose up -p
 
 
 ### Create register
@@ -25,7 +23,9 @@ DELETE /adress/{id} => remove an item
 
 ### Useful commands
 
-  ```
+```sh
   docker ps
   docker network ls
-  ```
+  docker-compose up
+  docker-compose up -p
+```
