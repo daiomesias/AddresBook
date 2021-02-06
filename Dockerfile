@@ -1,11 +1,12 @@
 FROM node:alpine
 
-LABEL author="Dan Wahlin"
+LABEL author="Dario"
 
-ENV NODE_ENV=development 
+ENV NODE_ENV=development
 ENV PORT=3000
 
-COPY . /var/www
+#COPY . /var/www
+#VOLUME . /var/www
 
 WORKDIR   /var/www
 

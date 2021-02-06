@@ -2,14 +2,15 @@ const express = require('express')
 
 //Initialize express app
 const app = express();
-
 const mongoose = require('mongoose')
-
 const Address = require('./models/Address')
-
 const bodyParser = require('body-parser')
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: false}))
+//app.use(bodyParser.urlencoded({extended: false}))
+//app.use(express.bodyParser());
+app.use(express.urlencoded());
+app.use(express.json());
+
+
 
 // mongoose.connect('mongodb://root:example@mongo:27017/AddressBook', {
 mongoose.connect('mongodb://mongo/AddressBook', {
@@ -23,17 +24,17 @@ mongoose.connect('mongodb://mongo/AddressBook', {
 
 // app.METHOD(PATH, HANDLER)
 
-
-
-
-
 // Adding a User to AddressBook
 app.post('/', (req, res) => {
 
-    name = req.body.name,
-    email = req.body.email,
-    phone = req.body.phone,
-    place = req.body.place
+    let name = req.body.name;
+    let email = req.body.email;
+    let phone = req.body.phone;
+    let place = req.body.place;
+console.log(name);
+console.log(email);
+console.log(phone);
+console.log(place);
 
    let newAddress = new Address({
      name: name,
@@ -43,8 +44,8 @@ app.post('/', (req, res) => {
     })
 
 
-    
    newAddress.save().then((address) => {
+     console.log("it is now save!");
      res.send(address)
     }).catch((err) => {
      console.log(err)
@@ -57,30 +58,6 @@ app.get('/:id', (req, res) =>{
      res.send(user)
     })
    })
-
-//    // Updating the User
-// app.post('/update/:id', (req, res) => {
-//     let address = {}
-//     if (req.body.name) address.name = req.body.name
-//     if (req.body.email) address.email = req.body.email
-//     if (req.body.phone) address.phone = req.body.phone
-//     if (req.body.place) address.place = req.body.place
-//    address = { $set: address }
-//    Address.update({_id: req.params.id}, address).then(() => {
-//      res.send(address)
-//     }).catch((err) => {
-//      console.log(error)
-//     })
-//    })
-
-// // Deleting the User from AddressBook
-// app.delete('/delete/:id', (req, res) => {
-//     Address.remove(_id: req.params.id).then(() => {
-//      res.send('user deleted')
-//     }).catch((err) => {
-//      console.log(error)
-//     })
-//    })
 
 //Initialize the sever
 app.listen(3000, () => {
