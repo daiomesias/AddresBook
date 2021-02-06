@@ -14,11 +14,12 @@ curl -X POST \
 
 
 ### Endpoints
-
+ ```
 POST /adress/{id} => get one row
 GET /adress => list all rows
 PUT /adress => insert one row
 DELETE /adress/{id} => remove an item
+```
 
 
 
