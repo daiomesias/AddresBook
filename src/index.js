@@ -10,10 +10,12 @@ const bodyParser = require('body-parser')
 app.use(express.urlencoded());
 app.use(express.json());
 
+const DB_HOST=process.env.DB_HOST;
+const DB_NAME=process.env.DB_NAME;
 
 
 // mongoose.connect('mongodb://root:example@mongo:27017/AddressBook', {
-mongoose.connect('mongodb://mongo/AddressBook', {
+mongoose.connect(`mongodb://${DB_HOST}/${DB_NAME}`, {
   useNewUrlParser: true, useUnifiedTopology: true
 }).then(() => {
  console.log('connected to db')
