@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notificator-deployment
+  labels:
+    app: notificator
+spec:
+  selector:
+    matchLabels:
+      app: notificator
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: notificator
+    spec:
+      containers:
+        - name: notificator
+          image: yefriddavid/garlic-notificator:v1
+          #imagePullPolicy: "Always"
+          ports:
+            - name: noti-service
+              containerPort: 8082
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: noti-service
+spec:
+  selector:
+    app: notificator
+  ports:
+    - port: 8082
+      nodePort: 30091
+      targetPort: noti-service
+  type: NodePort

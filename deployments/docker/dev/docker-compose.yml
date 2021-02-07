@@ -1,0 +1,34 @@
+version: "3.1"
+services:
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    restart: always
+    environment:
+      PORT: 3000
+      # MONGO_INITDB_ROOT_USERNAME: root
+      # MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      - nodeapp-network
+
+  nodeapp:
+    container_name: nodeapp
+    image: imagenodeapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "../../../src:/var/www"
+    ports:
+      - "3000:3000"
+    networks:
+      - nodeapp-network
+    depends_on:
+      - mongodb
+    environment:
+      DB_HOST: mongodb
+      DB_NAME: AdressBook
+
+networks:
+  nodeapp-network:
+    driver: bridge
